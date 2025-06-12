@@ -1,0 +1,7 @@
+python -m venv my
+
+my\Scripts\activate
+
+
+pip install streamlit langchain langchain-huggingface chromadb python-dotenv pandas sentence-transformers huggingface-hub transformers
+
