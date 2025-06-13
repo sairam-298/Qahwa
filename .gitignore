@@ -12,10 +12,6 @@ __pycache__/
 *$py.class
 *.so
 
-# FAISS index files
-faiss_index/
-faiss_index*
-
 # Large model files
 *.pth
 *.bin
