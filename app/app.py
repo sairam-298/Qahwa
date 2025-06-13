@@ -169,8 +169,8 @@ with st.sidebar:
         text-align: left;
     ">
         At <span style="color: {GOLDEN_YELLOW}; font-weight: bold;">Qahwa</span>, we curate the finest 
-        <em>Arabic coffee seeds</em> — like the citrusy 
-        <span style="color: {GOLDEN_YELLOW}; font-weight: bold;">Yemeni Mokha</span> — with select blends 
+        <em>Arabic coffee seeds</em> — like the earthly, chocolatey feeling
+        <span style="color: {GOLDEN_YELLOW}; font-weight: bold;">Yemeni Matari</span> — with select blends 
         from Ethiopia and Mexico.
         <br><br>
         Choose from elegant <strong>small (100g)</strong>, <strong>medium (250g)</strong>, 
