@@ -1,10 +1,12 @@
 import re
 import csv
-import uuid  # ✅ Add this import
+import uuid
 from datetime import datetime
+from pathlib import Path
 from utils.emails import send_confirmation_email
 
-bookings = 'D:\\qar\\data\\bookingslist.csv'  # You may update this path
+# Define path to bookingslist.csv relative to project root
+BOOKINGS_PATH = Path(__file__).resolve().parent.parent / "data" / "bookingslist.csv"
 
 def extractinfo(entry: str):
     emails = re.search(r'[\w\.-]+@[\w\.-]+(?=[^\w\.-]|$)', entry)
@@ -25,7 +27,7 @@ def extractinfo(entry: str):
 
 def slot_is_full(date: str, time: str) -> bool:
     try:
-        with open(bookings, mode="r", newline="") as csvfile:
+        with open(BOOKINGS_PATH, mode="r", newline="") as csvfile:
             reader = csv.DictReader(csvfile)
             count = sum(1 for row in reader if row["date"] == date and row["time"] == time)
             return count >= 10
@@ -36,14 +38,9 @@ def savebooking(infos: dict) -> bool:
     if slot_is_full(infos["date"], infos["time"]):
         return False
 
-    isfile = False
-    try:
-        with open(bookings, "r"):
-            isfile = True
-    except FileNotFoundError:
-        pass
+    isfile = BOOKINGS_PATH.exists()
 
-    with open(bookings, mode="a", newline="") as csvfile:
+    with open(BOOKINGS_PATH, mode="a", newline="") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=["name", "email", "date", "time", "timestamp", "booking_id"])
         if not isfile:
             writer.writeheader()
@@ -69,3 +66,4 @@ def bookingscheck(entry: str):
         )
     else:
         return f"❌ Booking failed. Please try a different slot."
+

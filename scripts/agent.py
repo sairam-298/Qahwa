@@ -5,7 +5,7 @@ from langchain_huggingface import HuggingFaceEmbeddings, HuggingFaceEndpoint
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.schema import Document
-
+from pathlib import Path
 
 # Load environment variables
 load_dotenv()
@@ -13,7 +13,6 @@ hf = os.getenv("HUGGINGFACE_API_TOKEN")
 if not hf:
     raise EnvironmentError("❌ Missing Hugging Face token in .env")
 os.environ["HUGGINGFACE_API_TOKEN"] = hf
-
 
 # Greetings
 GREETINGS = {
@@ -28,7 +27,9 @@ GREETINGS = {
 # Prompt Template
 PROMPT_TEMPLATE = """
 You are an expert assistant for Qahwa, a boutique Arabic coffee brand. 
-Answer clearly and concisely using only the context provided. Do NOT summarize. 
+Answer clearly and concisely using only the context provided. Do NOT make up or guess missing information. 
+Answer only the given question and nothing else. Avoid repeating the question.
+
 Always present prices in rupees (e.g., '850 rupees' instead of '₹850' or 'Rs. 850'). 
 Provide direct, actionable insights in short, helpful bullets.
 
@@ -44,24 +45,31 @@ PROMPT = PromptTemplate(
     template=PROMPT_TEMPLATE
 )
 
-# Load FAISS vectorstore
+# Load FAISS vectorstore from relative path
 embedding = HuggingFaceEmbeddings(
     model_name="BAAI/bge-base-en-v1.5",
     model_kwargs={"device": "cpu"},
     encode_kwargs={"normalize_embeddings": True}
 )
+
+# Use relative path (project_root/faiss_index)
+FAISS_INDEX_DIR = Path(__file__).resolve().parent.parent / "faiss_index"
+if not FAISS_INDEX_DIR.exists():
+    raise FileNotFoundError(f"❌ FAISS index not found at {FAISS_INDEX_DIR}")
+
 vs = FAISS.load_local(
-    "D:\\qar\\faiss_index", 
+    str(FAISS_INDEX_DIR),
     embeddings=embedding,
     allow_dangerous_deserialization=True
 )
 
-# Load Mistral LLM
+# Load LLM
 llm = HuggingFaceEndpoint(
     repo_id="mistralai/Mistral-7B-Instruct-v0.3",
     temperature=0.3,
     max_new_tokens=512,
     repetition_penalty=1.1,
+    timeout=300,
     huggingfacehub_api_token=hf
 )
 
@@ -70,30 +78,24 @@ rag_chain = RetrievalQA.from_chain_type(
     llm=llm,
     chain_type="stuff",
     retriever=vs.as_retriever(search_kwargs={"k": 4}),
-    chain_type_kwargs={"prompt": PROMPT}
+    chain_type_kwargs={"prompt": PROMPT},
+    input_key="question"
 )
-
-
-
 ##################### I. QnA AGENT #############################
 
-# Query agent
 def query_agent(query: str):
     query_lower = query.strip().lower()
     if query_lower in GREETINGS:
         return GREETINGS[query_lower]
 
-    response = rag_chain.invoke({"query": query})
+    response = rag_chain.invoke({"question": query})
 
-    # Handle output
     response_text = response.get("result", "") if isinstance(response, dict) else str(response)
     response_text = response_text.strip()
 
-    # Remove multiple **Answer:** headers
     while response_text.lower().startswith("**answer:**"):
         response_text = response_text[len("**Answer:**"):].strip()
 
-    # Remove repeated lines
     seen = set()
     unique_lines = []
     for line in response_text.split('\n'):
@@ -103,7 +105,6 @@ def query_agent(query: str):
             unique_lines.append(line)
     response_text = '\n'.join(unique_lines)
 
-    # Store to FAISS (memory)
     memory_doc = Document(
         page_content=f"User: {query}\nAssistant: {response_text}",
         metadata={"source": "chat_memory", "id": f"conv_{hash(query)}"}
@@ -115,10 +116,9 @@ def query_agent(query: str):
 
     return response_text
 
-########################## II. BOOKING AGENT (PLACEHOLDER) #############################
+########################## II. BOOKING AGENT #############################
 
 def booking_agent(query: str):
-    # In Streamlit, this will be triggered by form inputs
     return (
         "📅 Sure! To book a workshop, please select a slot from the dropdown below. "
         "You’ll get a confirmation via email once done. ☕"
@@ -141,8 +141,7 @@ def route_query(query: str):
     else:
         return query_agent(query)
 
-
-# CLI loop
+# CLI loop (for local testing)
 if __name__ == "__main__":
     print("🤖 Qahwa Agent is live! Ask your questions below.\n")
     while True:

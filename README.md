@@ -1,7 +1,7 @@
-# ☕ Qahwa Coffee Chatbot
+# ☕ Qahwa
 
 <div align="center">
-  <img src="app/img/qahwalogo.png" alt="Qahwa Logo" width="200"/>
+  <img src="img/qahwalogo.png" alt="Qahwa Logo" width="200"/>
   
   [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
   [![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -9,8 +9,7 @@
 </div>
 
 ## 🌟 Overview
-
-Qahwa Coffee Chatbot is an intelligent virtual assistant designed to help customers explore and purchase premium Arabic coffee. Built with modern AI technologies, it provides personalized recommendations, product information, and handles workshop bookings through an elegant, user-friendly interface.
+Qahwa is a boutique coffee company specializing in premium Arabic coffee seed varieties. Our intelligent virtual assistant helps customers discover our curated selection of coffee seeds, provides detailed varietal information, and offers personalized recommendations based on growing conditions and flavor preferences. Built with modern AI technology, the platform delivers expert guidance on cultivation, brewing techniques, and seamlessly handles bookings for our weekly coffee brewing workshops through an intuitive, user-friendly interface.
 
 ## 🚀 Features
 
@@ -18,7 +17,11 @@ Qahwa Coffee Chatbot is an intelligent virtual assistant designed to help custom
 - **Product Catalog**: Browse and learn about premium Arabic coffee varieties
 - **Workshop Booking**: Reserve spots for coffee brewing workshops
 - **Responsive Design**: Beautiful UI that works on all devices
-- **AI-Powered**: Advanced language understanding for accurate responses
+- **AI-Powered**: Intelligent language understanding for accurate responses
+
+## Landing Page
+
+![Landing Page](img/landing%20page.png)
 
 ## 🛠️ Tech Stack
 
@@ -26,7 +29,7 @@ Qahwa Coffee Chatbot is an intelligent virtual assistant designed to help custom
 - **Python 3.9+**: Core programming language
 - **Streamlit**: Web application framework
 - **LangChain**: Framework for developing applications with LLMs
-- **Hugging Face**: For embeddings and language models
+- **Mistral 7B using Hugging Face**: For embeddings and language models
 - **FAISS**: Efficient similarity search
 
 ### Frontend
@@ -45,8 +48,8 @@ Qahwa Coffee Chatbot is an intelligent virtual assistant designed to help custom
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/qahwa-chatbot.git
-   cd qahwa-chatbot
+   git clone https://github.com/yourusername/Qahwa.git
+   cd Qahwa
    ```
 
 2. **Create and activate a virtual environment**
@@ -112,27 +115,77 @@ Qahwa Coffee Chatbot is an intelligent virtual assistant designed to help custom
 ## 🏗️ Project Structure
 
 ```
-qahwa-chatbot/
-├── app/                    # Main application code
-│   └── app.py             # Streamlit application
-├── img/                   # Image assets
-│   ├── qahwalogo.png
-│   ├── hero3.png
+qahwa/
+├── app/
+│   └── app.py
+├── data/
+│   ├── bookingslist.csv
+│   ├── catalog.csv
+│   ├── Qahwa Info.docx
+│   └── Qahwa Info.pdf
+├── faiss_index/
+│   ├── index.faiss
+│   └── index.pkl
+├── img/
+│   ├── hero-coffee.webp
 │   ├── hero2.png
-│   └── hero-coffee.webp
+│   ├── hero3.png
+│   ├── landing-page.png
+│   └── qahwalogo.png
+├── my/
+│   ├── etc/
+│   ├── include/
+│   ├── lib/
+│   ├── Scripts/
+│   └── share/
+│       └── pyvenv.cfg
 ├── scripts/
-│   └── agent.py          # Chatbot logic and AI integration
-├── data/                  # Data files
-│   ├── catalog.csv        # Product catalog
-│   ├── bookingslist.csv   # Workshop bookings
-│   ├── Qahwa Info.pdf     # Detailed product information (PDF)
-│   └── Qahwa Info.docx    # Detailed product information (Word)
-├── utils/                 # Utility functions
-│   └── emails.py         # Email handling utilities
-├── requirements.txt       # Python dependencies
-└── README.md             # This file
+│   ├── __pycache__/
+│   ├── agent.py
+│   ├── booking.py
+│   └── loader.py
+├── utils/
+│   ├── __pycache__/
+│   └── emails.py
+├── .env
+├── .gitignore
+├── making_env
+├── README.md
+└── requirements.txt
 ```
 
+## 📂 Directory Overview 
+
+### Core Directories
+
+* **`app/`**
+    * `app.py`: The primary application entry point, responsible for running the Streamlit interface.
+
+* **`scripts/`**
+    * `agent.py`: Contains the core chatbot logic and AI integration, handling user queries and generating responses.
+    * `booking.py`: Implements the booking system functionality, managing workshop bookings and related operations.
+    * `loader.py`: Provides utilities for loading various data sources used by the application.
+
+* **`utils/`**
+    * `emails.py`: Contains utility functions for handling email communications, such as sending booking confirmations or notifications.
+
+### Data & Assets
+
+* **`data/`**
+    * `bookingslist.csv`: Stores records of workshop bookings.
+    * `catalog.csv`: Contains the product and service catalog information.
+    * `Qahwa Info.docx`: Detailed project documentation in Microsoft Word format.
+    * `Qahwa Info.pdf`: Detailed project documentation in PDF format.
+
+* **`faiss_index/`**
+    * `index.faiss`: The FAISS (Facebook AI Similarity Search) vector index, used for efficient semantic search and retrieval.
+    * `index.pkl`: Serialized metadata associated with the FAISS index.
+
+* **`img/`**
+    * `qahwalogo.png`: The official logo for the Qahwa Chatbot project.
+    * `hero2.png`, `hero3.png`, `hero-coffee.webp`: Various hero images and branding assets used in the application's UI.
+      
+      
 ## 🧩 Architecture
 
 ```mermaid

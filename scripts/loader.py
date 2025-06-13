@@ -8,6 +8,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader
 from typing import List
 from difflib import SequenceMatcher
+from pathlib import Path
 
 # Load environment variables
 load_dotenv()
@@ -20,6 +21,10 @@ if hf:
 else:
     print("❌ Failed to load Hugging Face token from .env")
 
+# Define paths using relative structure
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+FAISS_OUTPUT_DIR = BASE_DIR / "faiss_index"
 
 # Load CSV
 def csvloader(csv_path: str) -> List[Document]:
@@ -65,16 +70,17 @@ def embed(docs: List[Document], model_name: str = "BAAI/bge-base-en-v1.5") -> FA
         encode_kwargs={'normalize_embeddings': True}
     )
     vs = FAISS.from_documents(docs, embedding=embeddings)
-    vs.save_local("faiss_index")
+    vs.save_local(str(FAISS_OUTPUT_DIR))
     return vs
 
-
+# Run end-to-end
 if __name__ == "__main__":
     print("📥 Loading documents...")
-    csv_docs = csvloader("D:\\qar\\data\\catalog.csv")
+
+    csv_docs = csvloader(str(DATA_DIR / "catalog.csv"))
 
     try:
-        pdf_docs = pdfloader("D:\\qar\\data\\Qahwa Info.pdf")
+        pdf_docs = pdfloader(str(DATA_DIR / "Qahwa Info.pdf"))
     except FileNotFoundError:
         pdf_docs = []
         print("⚠️ No FAQ PDF found. Skipping...")
@@ -90,4 +96,4 @@ if __name__ == "__main__":
 
     print("🔗 Embedding and saving to FAISS...")
     vs = embed(clean_chunks)
-    print("✅ FAISS vectorstore saved as 'faiss_index'")
+    print("✅ FAISS vectorstore saved in 'faiss_index/'")

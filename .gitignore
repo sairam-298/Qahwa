@@ -1,0 +1,6 @@
+# Environment variables
+.env
+
+# FAISS index files
+faiss_index/
+faiss_index*
