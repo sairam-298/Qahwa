@@ -11,6 +11,9 @@
 ## 🌟 Overview
 Qahwa is a boutique coffee company specializing in premium Arabic coffee seed varieties. Our intelligent virtual assistant helps customers discover our curated selection of coffee seeds, provides detailed varietal information, and offers personalized recommendations based on growing conditions and flavor preferences. Built with modern AI technology, the platform delivers expert guidance on cultivation, brewing techniques, and seamlessly handles bookings for our weekly coffee brewing workshops through an intuitive, user-friendly interface.
 
+## ⚡App
+The app is live on Streamlit Cloud at https://cafekahwa.streamlit.app/
+
 ## 🚀 Features
 
 - **Interactive Chat Interface**: Natural language conversations about coffee products
