@@ -93,7 +93,7 @@ The app is live on Streamlit Cloud at https://cafekahwa.streamlit.app/
 
 #### Product Information
 - "What types of coffee do you offer?"
-- "Tell me about your Yemeni Mokha blend"
+- "Tell me about your Yemeni Matari blend"
 - "What are the different package sizes available?"
 
 ### Workshop Booking
